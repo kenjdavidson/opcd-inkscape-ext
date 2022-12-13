@@ -14,5 +14,5 @@ jobs:
       with:
         type: 'zip'
         filename: 'release.zip'
-        exclusions: ".git .github .gitattributes .gitignore, test, opcd-inkscape-ext.code-workspace"
+        exclusions: "*.git* /*test/ *.code-workspace *.env*"
         
