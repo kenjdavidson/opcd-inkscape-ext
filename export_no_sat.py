@@ -19,11 +19,36 @@ class ExportNoSat(inkex.EffectExtension):
     """
 
     def add_arguments(self, pars: ArgumentParser) -> None:
-        pars.add_argument("--satellite_layer", type=str, default="Satellite", help="Name of the satellite layer")
-        pars.add_argument("--export_path", type=str, help="Export path for your terrain conversion files")
-        pars.add_argument("--run_conversion", type=inkex.Boolean, help="Run conversion after export")
-        pars.add_argument("--debug_mode", type=inkex.Boolean, help="Enable debug messages")
-        pars.add_argument("--tab", type=str, dest="tab", default="controls", help="")   # Selected Tab
+        pars.add_argument(
+            "--satellite_layer", 
+            type=str, 
+            default="Satellite", 
+            help="Name of the satellite layer"
+        )
+        pars.add_argument(
+            "--export_path", 
+            type=str, 
+            help="Export path for your terrain conversion files"
+        )
+        pars.add_argument(
+            "--run_conversion", 
+            type=inkex.Boolean, 
+            help="Run conversion after export"
+        )
+        pars.add_argument(
+            "--debug_mode", 
+            type=inkex.Boolean, 
+            help="Enable debug messages"
+        )
+        # The selected tab when `accept` button is clicked.  This could be used to run different functionality based on the 
+        # current tab.  For now it doesn't do much.
+        pars.add_argument(
+            "--tab", 
+            type=str, 
+            dest="tab", 
+            default="controls", 
+            help=""
+        )
 
     def effect(self):
         self.logger = Logger(self.options.debug_mode)
@@ -42,6 +67,9 @@ class ExportNoSat(inkex.EffectExtension):
         return "{}_no_sat.{}".format(names[0], names[1])
 
     def remove_layer(self):
+        """
+        Remove the `Satellite` layer, or whichever label/name was provided in the options.
+        """
         self.logger.debug("Attempting to remove '{}' layer".format(self.options.satellite_layer))
         document = copy.deepcopy(self.document)
         xpath = '//svg:g[@inkscape:label="{}"]'.format(self.options.satellite_layer)
@@ -72,12 +100,23 @@ class ExportNoSat(inkex.EffectExtension):
         return export_path
 
     def write_temp_document(self, document):
+        """
+        Write the document to a temporary file.  I'm not entirely sure this is required (might be possible just to go straight to disk)
+        but this allows the use of the `inkscape --export` from the file just incase something special happens.
+        """
         with tempfile.NamedTemporaryFile(delete=False) as temporary_file:
             self.logger.debug("Creating temp file {}".format(temporary_file.name))
             document.write(temporary_file.name)
             return temporary_file.name
 
     def run_conversion(self, exported_file):
+        """
+        Run the conversion process.
+        
+        At this point it assumes the exe is in the output folder which follows the tutorials, so it should be ok.
+        
+        @see https://www.youtube.com/watch?v=1RxOddF5ICg&list=PLOHx7fwaLyc_IxIX7rIHY9Yk_OoMzJclO
+        """
         command = [
             os.path.join(self.options.export_path, GSPRO_CONVERT),
             exported_file
