@@ -14,16 +14,5 @@ jobs:
       with:
         type: 'zip'
         filename: 'release.zip'
-        exclusions: |
-          [
-            '.github',
-            '.gitattributes',
-            '.gitignore',
-            '.env-sample',
-            'test',
-            'opcd-inkscape-ext.code-workspace'
-          ].join(' ')
-    - name: Release
-      uses: softprops/action-gh-release@v1
-
-       
+        exclusions: ".git .github .gitattributes .gitignore, test, opcd-inkscape-ext.code-workspace"
+        
