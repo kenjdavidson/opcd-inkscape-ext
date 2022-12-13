@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+  <name>Export No Sat SVG</name>
+  <id>kjd.opcd.inkscape.export_no_sat</id>
+  <param name="tab" type="notebook">
+    <page name="controls" gui-text="Controls">
+      <param type="string" name="satellite_layer" gui-text="Sat Layer:">Satellite</param>  
+      <param type="path" name="export_path" gui-text="Export Path:" mode="folder"/>
+      <param type="bool" name="run_conversion" gui-text="Run conversion after export">true</param>
+    </page>
+    <page name="help" gui-text="Help">
+      <label appearance="header">Export No Sat</label>
+      <label>Export your no satellite version in one step.  For more information on this process check out the masta_blasta link below:</label>
+      <label appearance="url">https://www.youtube.com/watch?v=1RxOddF5ICg&amp;list=PLOHx7fwaLyc_IxIX7rIHY9Yk_OoMzJclO</label>
+      <label appearance="header">Debug</label>
+      <param type="bool" name="debug_mode" gui-text="Show debug messages">true</param>
+    </page>
+  </param>
+  <effect needs-live-preview="false">
+    <object-type>all</object-type>
+      <effects-menu>
+        <submenu name="OPCD"/>
+      </effects-menu>
+  </effect>
+  <script>
+    <command location="inx" interpreter="python">export_no_sat.py</command>
+  </script>
+</inkscape-extension>
