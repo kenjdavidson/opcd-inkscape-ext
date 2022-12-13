@@ -10,7 +10,13 @@ jobs:
       with:
         type: 'zip'
         filename: 'release.zip'
-        exclusions: [
-          '.gitignore'
-        ].join(' ')
+        exclusions: |
+          [
+            '.github',
+            '.gitattributes',
+            '.gitignore',
+            '.env-sample',
+            'test',
+            'opcd-inkscape-ext.code-workspace'
+          ].join(' ')
        
