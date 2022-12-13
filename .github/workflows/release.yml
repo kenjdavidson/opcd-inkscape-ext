@@ -1,5 +1,9 @@
 name: Release Extensions
-on: workflow_dispatch
+on: 
+  workflow_dispatch:    
+  push:
+      tags:
+        - "v*.*.*"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,4 +23,7 @@ jobs:
             'test',
             'opcd-inkscape-ext.code-workspace'
           ].join(' ')
+    - name: Release
+      uses: softprops/action-gh-release@v1
+
        
