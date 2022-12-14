@@ -2,6 +2,10 @@
 from inkex import utils
 
 class Logger:
+    """
+    Standardize logging within the Inkscape extension package.
+    """
+    
     def __init__(self, debug: bool):
         self.debug_mode = debug
 

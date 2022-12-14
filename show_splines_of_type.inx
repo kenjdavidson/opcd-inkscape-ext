@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+  <name>Show Splines (of type)</name>
+  <id>kjd.opcd.inkscape.show_splines_of_type</id>
+  <param name="tab" type="notebook">
+    <page name="controls" gui-text="Controls">
+      <param name="spline_type" type="optiongroup" appearance="combo" gui-text="Spline Type">
+        <option value="GREEN">Greens</option>
+        <option value="GREEN_FRINGE">Green Fringe</option>
+        <option value="TEE">Tees</option>
+        <option value="FAIRWAY">Fairways</option>
+        <option value="ROUGH">Rough</option>
+        <option value="SEMI_ROUGH">Semi Rough</option>
+        <option value="DEEP_ROUGH">Deep Rough</option>
+        <option value="BUNKER">Bunkers</option>
+        <option value="POT_BUNKER">Pot Bunkers</option>
+        <option value="WATER">Water</option>
+        <option value="WATER_BULKHEAD">Water Bulkhead</option>
+        <option value="PINESTRAW">Pinestraw</option>
+        <option value="CONCRETE">Concrete</option>
+        <option value="CUSTOM_1">Custom 1</option>
+        <option value="CUSTOM_2">Custom 2</option>
+      </param>
+      <param name="show_all" type="bool" gui-text="Show all types">false</param> 
+    </page>
+    <page name="help" gui-text="Help">
+      <label appearance="header">Show Splines (of type)</label>
+      <label>Provides quick show/hide of specific spline types.  Each type has a specific colour defined in the OPCD palette, for more information and to download see:</label>
+      <label appearance="url">https://www.youtube.com/watch?v=BIzndJfkIDQ&amp;list=PLOHx7fwaLyc87BPA-TH1jg8jI2OYU_loL</label>
+      <label appearance="header">Debug</label>
+      <param type="bool" name="debug_mode" gui-text="Show debug messages">true</param>
+    </page>
+  </param>
+  <effect needs-live-preview="false">
+    <object-type>all</object-type>
+      <effects-menu>
+        <submenu name="OPCD"/>
+      </effects-menu>
+  </effect>
+  <script>
+    <command location="inx" interpreter="python">show_splines_of_type.py</command>
+  </script>
+</inkscape-extension>

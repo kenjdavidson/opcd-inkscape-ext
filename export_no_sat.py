@@ -5,12 +5,13 @@ import copy
 import os
 import subprocess
 import tempfile
+from base_opcd_extension import BaseOpcdExtension
 import inkex
 from logger import Logger
 
 GSPRO_CONVERT = "GSProSVGConvert.exe"
 
-class ExportNoSat(inkex.EffectExtension):
+class ExportNoSat(BaseOpcdExtension):
     """
     Export the no satellite version of your SVG.  If requested (on by default) the file will be run through the 
     conversion process.
@@ -19,6 +20,8 @@ class ExportNoSat(inkex.EffectExtension):
     """
 
     def add_arguments(self, pars: ArgumentParser) -> None:
+        super().add_arguments(pars)
+
         pars.add_argument(
             "--satellite_layer", 
             type=str, 
@@ -34,20 +37,6 @@ class ExportNoSat(inkex.EffectExtension):
             "--run_conversion", 
             type=inkex.Boolean, 
             help="Run conversion after export"
-        )
-        pars.add_argument(
-            "--debug_mode", 
-            type=inkex.Boolean, 
-            help="Enable debug messages"
-        )
-        # The selected tab when `accept` button is clicked.  This could be used to run different functionality based on the 
-        # current tab.  For now it doesn't do much.
-        pars.add_argument(
-            "--tab", 
-            type=str, 
-            dest="tab", 
-            default="controls", 
-            help=""
         )
 
     def effect(self):
