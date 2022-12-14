@@ -1,4 +1,4 @@
-name: 'Check For Release & Tag'
+name: 'Compile and Create Tag'
 on:
   push:
     branches:
