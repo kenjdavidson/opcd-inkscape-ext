@@ -6,6 +6,7 @@
     <page name="controls" gui-text="Controls">
       <param type="string" name="satellite_layer" gui-text="Sat Layer:">Satellite</param>  
       <param type="path" name="export_path" gui-text="Export Path:" mode="folder"/>
+      <param type="int" name="export_size" gui-text="Width/Height:" min="1" max="8192">8192</param>
       <param type="bool" name="run_conversion" gui-text="Run conversion after export">true</param>
     </page>
     <page name="help" gui-text="Help">

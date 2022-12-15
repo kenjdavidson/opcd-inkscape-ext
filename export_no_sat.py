@@ -34,6 +34,13 @@ class ExportNoSat(BaseOpcdExtension):
             help="Export path for your terrain conversion files"
         )
         pars.add_argument(
+            "--export_size",
+            type=int,
+            default=8192,
+            help="Export width/height of terrain"
+
+        )
+        pars.add_argument(
             "--run_conversion", 
             type=inkex.Boolean, 
             help="Run conversion after export"
@@ -82,6 +89,8 @@ class ExportNoSat(BaseOpcdExtension):
         command = [
             "inkscape",
             "--export-filename={}".format(export_path),
+            "--export-width={}".format(self.options.export_size),
+            "--export-height={}".format(self.options.export_size),
             temporary_file
         ]
         self.run_process(command)
