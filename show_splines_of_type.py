@@ -27,6 +27,12 @@ class ShowSplinesOfType(BaseOpcdExtension):
             default=False,
             help="Show all spline types"
         )
+        pars.add_argument(
+            "--show_unknown",
+            type=inkex.Boolean,
+            default=False,
+            help="Show splines which don't match OPCD colours"
+        )
 
     def effect(self):
         self.logger = Logger(self.options.debug_mode)
@@ -35,7 +41,9 @@ class ShowSplinesOfType(BaseOpcdExtension):
 
         self.logger.debug("Found {} paths".format(len(paths)))
     
-        if self.options.show_all:
+        if self.options.show_unknown:
+            self.show_unknown(paths)
+        elif self.options.show_all:
             self.show_all(paths)
         else:
             self.display_paths(paths, SplineType[self.options.spline_type])
@@ -55,6 +63,20 @@ class ShowSplinesOfType(BaseOpcdExtension):
     def show_all(self, paths):
         for path in paths:
             path.style['display'] = 'inline'
+
+    def show_unknown(self, paths):
+        count = 0
+        all_splines = set([spline.value for spline in SplineType])
+        self.logger.debug("Found {} unknown Spline types".format(count))
+
+        for path in paths:
+            if path.style['fill'].upper() in all_splines:
+                path.style['display'] = 'none'
+            else:
+                path.style['display'] = 'inline'
+                count += 1
+
+        self.logger.debug("Found {} unknown splines".format(count))
 
 if __name__ == '__main__':
     ShowSplinesOfType().run()

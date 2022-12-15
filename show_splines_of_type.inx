@@ -21,7 +21,9 @@
         <option value="CUSTOM_1">Custom 1</option>
         <option value="CUSTOM_2">Custom 2</option>
       </param>
-      <param name="show_all" type="bool" gui-text="Show all types">false</param> 
+      <label appearance="header">Overrides</label>
+      <param name="show_all" type="bool" gui-text="Show all spline types">false</param> 
+      <param name="show_unknown" type="bool" gui-text="Show splines which don't match OPCD colours">false</param>       
     </page>
     <page name="help" gui-text="Help">
       <label appearance="header">Show Splines (of type)</label>
